@@ -16,8 +16,19 @@ def extract(con):
     sql = read_sql("extract.sql")
     con.execute(sql, [str(DATA_DIR / "lecturas.csv")])
 
-    total = con.execute("SELECT COUNT(*) FROM raw_lecturas").fetchone()[0]
-    print(f"Registros cargados en EnergiaVivaSA_raw: {total}")
+    total = con.execute("SELECT COUNT(*) FROM raw_energia").fetchone()[0]
+    print(f"Registros cargados en raw_energia: {total}")
+
+
+def validate(con):
+    sql = read_sql("validar.sql")
+    con.execute(sql)
+
+    total_validos = con.execute("SELECT COUNT(*) FROM validos").fetchone()[0]
+    total_rechazados = con.execute("SELECT COUNT(*) FROM rechazados").fetchone()[0]
+
+    print(f"Registros válidos: {total_validos}")
+    print(f"Registros rechazados: {total_rechazados}")
 
 
 def main():
@@ -25,6 +36,8 @@ def main():
 
     try:
         extract(con)
+        validate(con)
+
     finally:
         con.close()
 
