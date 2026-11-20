@@ -52,9 +52,20 @@ def unir(con):
 def preguntas(con):
     consultas = read_sql("preguntas.sql").split(";")
 
-    for consulta in consultas:
-        if consulta.strip():
-            print(con.execute(consulta).fetchall())
+    print("\nConsumo total por tipo de cliente:")
+    print(con.execute(consultas[0]).fetchall())
+
+    print("\nBarrio con mayor consumo total:")
+    print(con.execute(consultas[1]).fetchall())
+
+    print("\nFacturación mensual de los primeros 6 meses:")
+    print(con.execute(consultas[2]).fetchall())
+
+    print("\nLos 5 medidores con mayor consumo:")
+    print(con.execute(consultas[3]).fetchall())
+
+    print("\nConsumo promedio por barrio:")
+    print(con.execute(consultas[4]).fetchall())
 
 
 def main():
