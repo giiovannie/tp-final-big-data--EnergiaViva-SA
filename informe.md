@@ -29,7 +29,6 @@ Durante la exploración se identificaron las siguientes inconsistencias:
 | `importe`      | Valores nulos                       |                    127 |
 | `id_lectura`   | Identificadores duplicados          | 145 filas involucradas |
 
-*Nota: los problemas pueden coincidir en un mismo registro, por lo que estas cantidades no representan filas únicas y no deben sumarse para obtener el total de registros afectados.*
 
 ### 2.2. Decisiones de limpieza
 
@@ -47,7 +46,7 @@ Estas decisiones permitieron establecer las reglas que posteriormente se utiliza
 
 ## 3. Desarrollo del proceso ETL
 
-Una vez finalizado el análisis exploratorio y definidas las reglas de tratamiento, organicé el proyecto siguiendo la arquitectura solicitada en la consigna.
+Una vez finalizado el análisis exploratorio y definidas las reglas de tratamiento, organice el proyecto siguiendo la arquitectura solicitada en la consigna.
 
 El proceso se desarrolló en las siguientes etapas:
 
@@ -179,12 +178,4 @@ Se calculó el promedio de consumo de los registros correspondientes a cada barr
 
 **Pendiente de completar:** en esta sección se documentará la configuración del DAG, la programación diaria a las 2:00 AM y la ejecución automática del pipeline.
 
-## 7. Conclusión
 
-El desarrollo de este trabajo permitió aplicar un proceso ETL completo, comenzando por el análisis exploratorio de los datos y continuando con la identificación, validación y corrección de inconsistencias.
-
-Una parte importante del trabajo fue investigar las causas de los problemas encontrados antes de decidir cómo tratarlos, evitando aplicar correcciones sin conocer previamente el comportamiento de los datos.
-
-A partir de las decisiones tomadas, fue posible recuperar una parte importante de los registros rechazados, construir una tabla final sin identificadores duplicados y obtener información útil para responder las preguntas de negocio planteadas.
-
-Finalmente, mediante Python, DuckDB y SQL se construyó un pipeline que permite procesar la información de manera ordenada. La automatización con Apache Airflow completará el proceso, permitiendo programar su ejecución periódica.
