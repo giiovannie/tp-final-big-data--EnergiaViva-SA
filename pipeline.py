@@ -31,12 +31,22 @@ def validate(con):
     print(f"Registros rechazados: {total_rechazados}")
 
 
+def limpieza(con):
+    sql = read_sql("limpiar.sql")
+    con.execute(sql)
+
+    total_limpios = con.execute("SELECT COUNT(*) FROM rechazados_limpios").fetchone()[0]
+
+    print(f"Registros recuperables: {total_limpios}")
+
+
 def main():
     con = duckdb.connect(str(DB_PATH))
 
     try:
         extract(con)
         validate(con)
+        limpieza(con)
 
     finally:
         con.close()

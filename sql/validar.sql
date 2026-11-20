@@ -28,10 +28,14 @@ SELECT
             WHEN NOT REGEXP_FULL_MATCH(TRIM(id_medidor), 'MED[0-9]{4}') THEN 'id_medidor_invalido'
         END,
         CASE
-            WHEN TRIM(barrio) NOT IN ('Norte', 'Sur', 'Centro', 'Oeste', 'Este') THEN 'barrio_no_normalizado'
+        WHEN NULLIF(TRIM(barrio), '') IS NULL
+            OR barrio NOT IN ('Norte', 'Sur', 'Centro', 'Oeste', 'Este')
+        THEN 'barrio_no_normalizado'
         END,
         CASE
-            WHEN TRIM(tipo_cliente) NOT IN ('residencial', 'comercial', 'industrial') THEN 'tipo_cliente_no_normalizado'
+            WHEN NULLIF(TRIM(tipo_cliente), '') IS NULL
+                OR tipo_cliente NOT IN ('residencial', 'comercial', 'industrial')
+            THEN 'tipo_cliente_no_normalizado'
         END,
         CASE
             WHEN TRY_CAST (TRIM(consumo_kwh) AS DOUBLE) IS NULL THEN 'consumo_no_numerico'
