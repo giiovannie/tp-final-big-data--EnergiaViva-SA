@@ -49,6 +49,14 @@ def unir(con):
     print(f"Registros en tabla_final: {total}")
 
 
+def preguntas(con):
+    consultas = read_sql("preguntas.sql").split(";")
+
+    for consulta in consultas:
+        if consulta.strip():
+            print(con.execute(consulta).fetchall())
+
+
 def main():
     con = duckdb.connect(str(DB_PATH))
 
@@ -57,6 +65,7 @@ def main():
         validate(con)
         limpieza(con)
         unir(con)
+        preguntas(con)
     finally:
         con.close()
 
