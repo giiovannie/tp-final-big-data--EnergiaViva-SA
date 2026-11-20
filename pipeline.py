@@ -40,6 +40,15 @@ def limpieza(con):
     print(f"Registros recuperables: {total_limpios}")
 
 
+def unir(con):
+    sql = read_sql("unir.sql")
+    con.execute(sql)
+
+    total = con.execute("SELECT COUNT(*) FROM tabla_final").fetchone()[0]
+
+    print(f"Registros en tabla_final: {total}")
+
+
 def main():
     con = duckdb.connect(str(DB_PATH))
 
@@ -47,7 +56,7 @@ def main():
         extract(con)
         validate(con)
         limpieza(con)
-
+        unir(con)
     finally:
         con.close()
 
